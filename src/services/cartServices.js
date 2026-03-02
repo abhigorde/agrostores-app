@@ -53,3 +53,4 @@ export const clearCart = async ({ auth, dispatchCart }) => {
     toast.error("Error to Clear Cart");
   }
 };
+
