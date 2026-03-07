@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useAddress } from "../context/address-context";
 import { clearCart } from "../services/cartServices";
 import { useAuth } from "../context/auth-context";
+import { placeOrder } from "../services/orderServices";
+import { useOrders } from "../context/orders-context";
 
 export const CartPriceCard = () => {
   const { cartState } = useCart();
@@ -12,6 +14,7 @@ export const CartPriceCard = () => {
   const { addressState } = useAddress();
   const { dispatchCart } = useCart();
   const { auth } = useAuth();
+  const { dispatchOrders } = useOrders();
 
   function totalPrice() {
     let collectPrice = 0;
@@ -29,7 +32,7 @@ export const CartPriceCard = () => {
     return collectOldPrice;
   }
 
-  const deliveryCharge = () => (totalPrice() > 499 ? 0 : 100);
+  const deliveryCharge = () => 0; // Temporarily set to 0 for testing - restore to: (totalPrice() > 499 ? 0 : 100)
 
   const loadScript = () => {
     return new Promise((resolve) => {
@@ -60,9 +63,24 @@ export const CartPriceCard = () => {
         description: "Test Transaction",
         image: "",
         handler: async (response) => {
+          const selectedAddress = addressState.addressList.find(
+            (a) => a.id === addressState.addressSelectedId
+          );
+          const orderData = {
+            paymentId: response.razorpay_payment_id,
+            items: cartState.cartItems,
+            totalAmount: totalPrice() + deliveryCharge(),
+            deliveryCharge: deliveryCharge(),
+            deliveryAddress: selectedAddress,
+          };
+          const savedOrder = await placeOrder({ auth, orderData, dispatchOrders });
           clearCart({ auth, dispatchCart });
-          toast.success("The payment was successfull");
-          navigate(`/order-success/${response.razorpay_payment_id}`);
+          toast.success("Payment successful! Order placed.");
+          navigate(
+            savedOrder
+              ? `/order-success/${response.razorpay_payment_id}?orderId=${savedOrder.orderId}`
+              : `/order-success/${response.razorpay_payment_id}`
+          );
         },
         prefill: {
           name: "Abhijeet Gorde",

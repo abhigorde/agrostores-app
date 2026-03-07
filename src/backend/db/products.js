@@ -5,6 +5,22 @@
 
 export const products = [
   {
+    _id: "TEST001",
+    title: "[TEST] Payment Verification Product - ₹1",
+    imgUrl: "https://m.media-amazon.com/images/I/71iPA5LfB7L._AC_UL320_.jpg",
+    price: 5,
+    price_old: 10,
+    discount: 50,
+    rating: 5.0,
+    isBestSeller: true,
+    isOutOfStock: false,
+    categoryName: "Fertilizers",
+    productDetails: {
+      Note: "This is a test product for payment verification only",
+    },
+    description: "Test product priced at ₹1 to verify Razorpay integration.",
+  },
+  {
     _id: "I5c1bFwd",
     title: "TrustBasket Organic Vermicompost Fertilizer Manure for Plants(5KG)",
     imgUrl: "https://m.media-amazon.com/images/I/71iPA5LfB7L._AC_UL320_.jpg",

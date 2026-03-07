@@ -38,6 +38,9 @@ export const MyProfile = () => {
                 <NavLink to="/wishlist" className="primary-color fs-sm-plus">
                   My Wishlist
                 </NavLink>
+                <NavLink to="/orders" className="primary-color fs-sm-plus">
+                  My Orders
+                </NavLink>
               </div>
               <div className="quick-links flex-column">
                 <h3 className="mg-y-xsm align-center">

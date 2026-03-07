@@ -18,7 +18,7 @@ export const addressInitialState = {
   setEditBox: "hide-edit-box",
   isEditing: false,
   editData: null,
-  addressSelectedId: null,
+  addressSelectedId: defaultAddress.id,
 };
 
 export const addressReducer = (state, { type, payload }) => {
@@ -70,7 +70,7 @@ export const addressReducer = (state, { type, payload }) => {
       return addressInitialState;
 
     default:
-      state;
+      return state;
   }
 };
 

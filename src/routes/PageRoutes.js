@@ -15,6 +15,8 @@ import { MyProfile } from "../pages/MyProfile";
 import { OrderSuccessPage } from "../pages/OrderSuccessPage";
 import { SearchPage } from "../pages/SearchPage";
 import { ErrorPage } from "../pages/ErrorPage";
+import { MyOrders } from "../pages/MyOrders";
+import { OrderDetailsPage } from "../pages/OrderDetailsPage";
 
 export const PageRoutes = () => {
   return (
@@ -37,6 +39,8 @@ export const PageRoutes = () => {
           path="/order-success/:paymentId"
           element={<OrderSuccessPage />}
         />
+        <Route path="/orders" element={<MyOrders />} />
+        <Route path="/orders/:orderId" element={<OrderDetailsPage />} />
       </Route>
       <Route path="/mock" element={<Mockman />} />
     </Routes>

@@ -50,7 +50,11 @@ export const Signup = () => {
       navigate("/products");
     } catch (error) {
       console.log("Signup Error", error);
-      toast.error("Server Error, Unable to Signup", error);
+      if (error?.response?.status === 422) {
+        toast.error("Email already registered! Please login.");
+      } else {
+        toast.error("Server Error, Unable to Signup");
+      }
     }
   };
 
