@@ -14,7 +14,7 @@ export const OrderDetailsPage = () => {
         if (ordersState.orders.length === 0) {
             fetchOrders({ dispatchOrders });
         }
-    }, []);
+    }, [dispatchOrders, ordersState.orders.length]);
 
     const order = ordersState.orders.find((o) => o.orderId === orderId);
 

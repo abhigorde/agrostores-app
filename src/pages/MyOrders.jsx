@@ -11,7 +11,7 @@ export const MyOrders = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         fetchOrders({ dispatchOrders });
-    }, []);
+    }, [dispatchOrders]);
 
     return (
         <>
